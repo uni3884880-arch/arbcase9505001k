@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кейс: Nano Slim - Meta Ads тест в Польше</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .header-meta-item {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+
+        .finance-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .finance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .finance-item {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .finance-item-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .finance-item-value {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .alert {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid;
+        }
+
+        .alert-danger {
+            background: #fee;
+            border-color: #f44;
+            color: #c33;
+        }
+
+        .alert-success {
+            background: #efe;
+            border-color: #4c4;
+            color: #393;
+        }
+
+        .alert-warning {
+            background: #ffc;
+            border-color: #fc3;
+            color: #963;
+        }
+
+        .alert-info {
+            background: #eff;
+            border-color: #3cf;
+            color: #369;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .creative-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .creative-item {
+            border: 2px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .creative-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .creative-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .creative-item-caption {
+            padding: 15px;
+            background: #f9f9f9;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .screenshot {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2px;
+            background: #667eea;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .comparison-header {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .comparison-cell {
+            background: white;
+            padding: 15px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .badge-red {
+            background: #fee;
+            color: #f44;
+        }
+
+        .badge-green {
+            background: #efe;
+            color: #4c4;
+        }
+
+        .badge-blue {
+            background: #eff;
+            color: #39c;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 10px 0 10px 35px;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checklist li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4c4;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .checklist.cross li:before {
+            content: '✗';
+            color: #f44;
+        }
+
+        .btn-download {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 20px 0;
+            transition: background 0.3s;
+        }
+
+        .btn-download:hover {
+            background: #5568d3;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .section {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+            .btn-download {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .section {
+                padding: 20px;
+            }
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Кейс: Тест оффера Nano Slim в Польше через Meta Ads</h1>
+            <div class="header-meta">
+                <div class="header-meta-item">
+                    <strong>Период:</strong> 5 дней
+                </div>
+                <div class="header-meta-item">
+                    <strong>Гео:</strong> Польша 🇵🇱
+                </div>
+                <div class="header-meta-item">
+                    <strong>Вертикаль:</strong> Nutra (weight loss)
+                </div>
+                <div class="header-meta-item">
+                    <strong>Источник:</strong> Meta Ads
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Финансовые результаты теста</h2>
+            
+            <div class="finance-box">
+                <h3 style="color: white; margin-top: 0;">Итоговые показатели</h3>
+                <div class="finance-grid">
+                    <div class="finance-item">
+                        <div class="finance-item-label">Потрачено</div>
+                        <div class="finance-item-value">$86</div>
+                    </div>
+                    <div class="finance-item">
+                        <div class="finance-item-label">Заработано</div>
+                        <div class="finance-item-value">$34</div>
+                    </div>
+                    <div class="finance-item">
+                        <div class="finance-item-label">Чистый убыток</div>
+                        <div class="finance-item-value">-$52</div>
+                    </div>
+                    <div class="finance-item">
+                        <div class="finance-item-label">ROI</div>
+                        <div class="finance-item-value">-60%</div>
+                    </div>
+                    <div class="finance-item">
+                        <div class="finance-item-label">CPL (Meta)</div>
+                        <div class="finance-item-value">$14.33</div>
+                    </div>
+                    <div class="finance-item">
+                        <div class="finance-item-label">CPL (реальный за апрув)</div>
+                        <div class="finance-item-value">$86</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-danger">
+                <strong>⚠️ Вывод по деньгам:</strong> Тест убыточный. На каждый вложенный доллар вернулось 40 центов (ROI -60%). Из 6 лидов подтверждён только 1. Для выхода в плюс нужно снизить CPL минимум в 2-3 раза или улучшить апрув до 50%+.
+            </div>
+
+            <h3>Детализация расходов и доходов</h3>
+            <table>
+                <tr>
+                    <th>Показатель</th>
+                    <th>Значение</th>
+                </tr>
+                <tr>
+                    <td>Реальный расход (суммарно)</td>
+                    <td><strong>$86</strong></td>
+                </tr>
+                <tr>
+                    <td>Лидов получено (Website Leads)</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>Подтверждённых (апрув) в партнёрке</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Выплата за лид</td>
+                    <td>$34</td>
+                </tr>
+                <tr>
+                    <td>Итоговый доход</td>
+                    <td><strong>$34</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🎯 1. Вводные и цель</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: #f0f4ff; padding: 20px; border-radius: 8px;">
+                    <strong>Оффер:</strong><br>
+                    Nano Slim – weight loss supplement (добавка для похудения)
+                </div>
+                <div style="background: #f0f4ff; padding: 20px; border-radius: 8px;">
+                    <strong>Гео:</strong><br>
+                    Польша
+                </div>
+                <div style="background: #f0f4ff; padding: 20px; border-radius: 8px;">
+                    <strong>Трафик:</strong><br>
+                    Meta Ads (Facebook / Instagram)
+                </div>
+            </div>
+
+            <h3>Цель запуска:</h3>
+            <ul class="checklist">
+                <li>Собрать статистику по связке креативы → лендинги → лиды</li>
+                <li>Получить первые заявки для оценки реальной цены лида</li>
+                <li>Выявить точки роста и оптимизации</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🎨 2. Продукт, креативы и лендинги</h2>
+            
+            <h3>Продукт и позиционирование</h3>
+            <p><strong>Продукт:</strong> Nano Slim – добавка для снижения веса в формате порошка/капсул</p>
+            
+            <h4>УТП (Unique Selling Proposition):</h4>
+            <ul>
+                <li>"Польский секрет потери веса без диет и тренировок"</li>
+                <li>Сжигание жира 24 часа в сутки</li>
+                <li>Заметный результат за 30 дней</li>
+                <li>Без добавленного сахара (Zero Sugar)</li>
+                <li>Рекомендовано диетологами</li>
+            </ul>
+
+            <h3>Креативы (использованные в тесте)</h3>
+            <div class="creative-grid">
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/a064f4e4-7fb7-4403-9d2e-d217e77b6d3e" alt="Креатив 1">
+                    <div class="creative-item-caption">
+                        <strong>Креатив 1:</strong> "Formuła bez cukru" (формула без сахара) + "Wspiera kontrolę apetytu" (поддерживает контроль аппетита)
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/dff0a787-9239-483b-9708-ec07ecfdf4b5" alt="Креатив 2">
+                    <div class="creative-item-caption">
+                        <strong>Креатив 2:</strong> "Rekomowandd przez dietetyków" (рекомендовано диетологами) + акция 50% скидка
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e9b58c70-d1be-4ba8-abc9-ccd01e5edbf9" alt="Креатив 3">
+                    <div class="creative-item-caption">
+                        <strong>Креатив 3:</strong> Трансформация "przed/po" (до/после) + "Rezultaty w 30 dni!" (результаты за 30 дней)
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/34eee1b6-c207-429f-91af-826ea8b3a762" alt="Креатив 4">
+                    <div class="creative-item-caption">
+                        <strong>Креатив 4:</strong> "Nano Slim - zdrowy element Twojej codziennej ruturnie" (здоровый элемент твоей ежедневной рутины)
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/894298a5-0a8e-4dc6-af77-6025e8346206" alt="Креатив 5">
+                    <div class="creative-item-caption">
+                        <strong>Креатив 5:</strong> "Nano Slim - lekkość każdego dnia" (лёгкость каждого дня) + контроль веса
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ab3c5b8f-68b4-4062-a841-b7c5e76159a8" alt="Креатив 6">
+                    <div class="creative-item-caption">
+                        <strong>Креатив 6:</strong> Банка продукта с силуэтом стройной женщины + "Sprawdź, czy promocja trwa"
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/1a6b617f-5f1a-4960-952b-f9d0d157565d" alt="Креатив 7">
+                    <div class="creative-item-caption">
+                        <strong>Креатив 7:</strong> Врач-диетолог + скидка 50% + дефицит ("tylko 2 kursy na stanie")
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f579451e-dad9-482c-aa5a-a9aff9e2fbe6" alt="Креатив 8">
+                    <div class="creative-item-caption">
+                        <strong>Креатив 8:</strong> Гири 86 кг → 82 кг → 55 кг + банки продукта (визуализация прогресса)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚙️ 3. Настройки трафика и трекинг</h2>
+            
+            <h3>Трекинг и потоки (Keitaro)</h3>
+            
+            <h4>Скриншоты Keitaro</h4>
+            <div class="screenshot">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/b0ed9c6b-c56c-4c00-b5e2-fdd1eaf003b9" alt="Статистика кампании">
+            </div>
+            <div class="screenshot">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/0e5d3d58-2d2a-4d35-8a84-1a7ac47dfa97" alt="Статистика лендингов">
+            </div>
+            <div class="screenshot">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/7a55a360-852a-45b1-ba40-0aa934257185" alt="Настройки кампании">
+            </div>
+
+            <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h4>Настройки потока:</h4>
+                <ul>
+                    <li><strong>Источник:</strong> Facebook.com</li>
+                    <li><strong>Интеграция:</strong> передача параметра cost</li>
+                    <li><strong>Кампания:</strong> NanoSlimPL</li>
+                    <li><strong>Язык:</strong> English/Polish</li>
+                    <li><strong>Устройства:</strong> Mobile, Tablet</li>
+                    <li><strong>Страна:</strong> Poland</li>
+                    <li><strong>Ротация лендингов:</strong> Black1/Black2/Black3 (~33% каждый)</li>
+                </ul>
+            </div>
+
+            <h3>Воронка</h3>
+            <div style="background: linear-gradient(to right, #667eea, #764ba2); padding: 30px; border-radius: 8px; color: white; text-align: center; font-size: 1.1em; line-height: 2;">
+                Facebook Ads → Keitaro → Landing Page → Предленд/Оффер → Лид
+            </div>
+
+            <h3>Собрано за тест:</h3>
+            <table>
+                <tr>
+                    <th>Метрика</th>
+                    <th>Значение</th>
+                </tr>
+                <tr>
+                    <td>Кликов</td>
+                    <td>4,400+</td>
+                </tr>
+                <tr>
+                    <td>Уникальных кликов</td>
+                    <td>~3,800</td>
+                </tr>
+                <tr>
+                    <td>Лиды (Website Leads в Meta)</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>Подтверждённые лиды (апрув)</td>
+                    <td>1</td>
+                </tr>
+            </table>
+
+            <h3>Детализация по дням в Meta Ads</h3>
+            <div class="creative-grid">
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/7d534306-3bde-496b-9851-9aecb75c9b63" alt="День 1">
+                    <div class="creative-item-caption">
+                        <strong>12 февраля:</strong> Старт кампании, 82.42$ потрачено, 5 лидов получено по $16.48 за лид
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/67fa208b-2132-4b84-8b24-366378b274a3" alt="День 2">
+                    <div class="creative-item-caption">
+                        <strong>13 февраля:</strong> $81.92 потрачено, 5 лидов ($16.38 CPL), активная работа ad set'ов
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/c2908189-e27b-455e-b3aa-4e0d50122926" alt="День 3">
+                    <div class="creative-item-caption">
+                        <strong>14 февраля:</strong> $16.53 потрачено, 3 лида ($5.51 CPL), появились первые конверсии
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/067f8d39-9c4a-4238-b420-25146890ee00" alt="День 4">
+                    <div class="creative-item-caption">
+                        <strong>15 февраля:</strong> $20.16 потрачено, 1 лид ($20.16 CPL), снижение эффективности
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/22253ec2-2492-4352-8e58-609991420d58" alt="День 5">
+                    <div class="creative-item-caption">
+                        <strong>16 февраля:</strong> $23.84 потрачено, 1 лид ($23.84 CPL), завершение тестовой кампании
+                    </div>
+                </div>
+                <div class="creative-item">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/6430b0ba-434f-4e65-be45-7f985d7250dc" alt="День 6">
+                    <div class="creative-item-caption">
+                        <strong>17 февраля:</strong> $15.33 потрачено, 0 лидов, кампания доработала остаток бюджета
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>📊 Динамика теста:</strong> В первые дни теста лиды приходили неравномерно, средний CPL держался в районе 16–17 $. На 3‑й день CPL снижался до 5.51 $ (лучший результат), но затем вырос до 20–24 $. Общий тренд: нестабильная конверсия и сильный разброс CPL при 6 лидах за весь период.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📅 4. Ход теста по дням</h2>
+            
+            <h3>День 1. Старт кампании и проблемы с модерацией</h3>
+            <div class="alert alert-danger">
+                <strong>❌ Проблема:</strong> Одно объявление сразу отклонено: "Deceptive or misleading business practices"<br>
+                <strong>Причина:</strong> Слишком сильные обещания результатов похудения + образы "до/после"
+            </div>
+            <div class="screenshot">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/764983b6-af20-4769-a564-405b665cf804" alt="Отклонённое объявление">
+            </div>
+            <p><strong>Попытки исправления:</strong> Отклонённое объявление редактировалось 4 раза, каждый раз → Rejected</p>
+            <div class="alert alert-success">
+                <strong>✅ Решение:</strong> Полностью удалить проблемное объявление и создать новое с нуля. Через ~10 минут новое объявление → Active
+            </div>
+
+            <h3>День 3-4. Появление лидов и оптимизация</h3>
+            <div class="screenshot">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/d26ca99f-ffa1-45c2-be3d-e15b7821a260" alt="Статистика кабинета">
+            </div>
+            <div class="alert alert-success">
+                <strong>✅ На третьи сутки:</strong> Первый лид с одного из объявлений. Статистика по CTR и цене клика заметно лучше остальных.
+            </div>
+
+            <h3>День 5. Пик результатов</h3>
+            <p><strong>Результат:</strong> 6 лидов получено, но подтверждён только 1 (остальные 5 — в ожидании или отклонены)</p>
+            <div class="screenshot">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/26c1e510-a1a1-48ee-b65d-2c1d150a71d3" alt="Скриншот из партнёрской программы">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 5. Результаты по цифрам</h2>
+            
+            <h3>Данные из кабинета Meta Ads</h3>
+            <div class="screenshot">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/49807c76-4461-4a42-a680-2ba221afd0a1" alt="Платежи">
+            </div>
+
+            <table>
+                <tr>
+                    <th>Метрика</th>
+                    <th>Значение</th>
+                </tr>
+                <tr>
+                    <td>Website Leads (получено)</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>Реальный расход (суммарно)</td>
+                    <td><strong>$86</strong></td>
+                </tr>
+                <tr>
+                    <td>CPL (по Meta)</td>
+                    <td>$14.33</td>
+                </tr>
+                <tr>
+                    <td>CPL реальный (за подтверждённый лид)</td>
+                    <td><strong>$86</strong></td>
+                </tr>
+            </table>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ Замечание от Meta:</strong> Средняя цена за website lead примерно в <strong>3.7 раза выше</strong>, чем у похожих ad set'ов в этом сегменте. Медианный CPL по индустрии: <strong>~$3.9</strong>
+            </div>
+
+            <h3>Демография лидов</h3>
+            <div class="screenshot">
+                <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/a2b262c8-55ba-4694-9d8a-09f1e8479c25" alt="Демография">
+            </div>
+
+            <table>
+                <tr>
+                    <th>Параметр</th>
+                    <th>Результат</th>
+                </tr>
+                <tr>
+                    <td>Пол</td>
+                    <td>100% женщины (мужчины не конвертировались)</td>
+                </tr>
+                <tr>
+                    <td>Возраст</td>
+                    <td>55-64 и 65+ (все 5 лидов)</td>
+                </tr>
+                <tr>
+                    <td>Язык</td>
+                    <td>Польский</td>
+                </tr>
+                <tr>
+                    <td>Устройства</td>
+                    <td>Mobile</td>
+                </tr>
+            </table>
+
+            <div class="alert alert-info">
+                <strong>💡 Вывод:</strong> Женщины 55+ – фактическое ядро аудитории для этого оффера в Польше.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔍 6. Основные выводы</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;">
+                <div style="background: #fee; padding: 25px; border-radius: 8px; border-left: 5px solid #f44;">
+                    <h4 style="color: #c33; margin-top: 0;">❌ 1. Цена высокая</h4>
+                    <p>6 лидов получено, но подтверждён только 1 за $86. Рекомендованная медиана: ~$3.9. <strong>Превышение в 22 раза.</strong></p>
+                </div>
+                
+                <div style="background: #ffc; padding: 25px; border-radius: 8px; border-left: 5px solid #fc3;">
+                    <h4 style="color: #963; margin-top: 0;">⚠️ 2. Политики Meta критичны</h4>
+                    <p>Прямые обещания "−12 кг за 30 дней", агрессивные "до/после" приводят к регулярным отклонам и риску бана.</p>
+                </div>
+                
+                <div style="background: #eff; padding: 25px; border-radius: 8px; border-left: 5px solid #3cf;">
+                    <h4 style="color: #369; margin-top: 0;">👵 3. Женщины 55+ – ядро аудитории</h4>
+                    <p>Все 6 лидов от женщин 55-64 и 65+. Мужчины не конвертировались вообще. Но подтвердился только 1 лид.</p>
+                </div>
+                
+                <div style="background: #ffc; padding: 25px; border-radius: 8px; border-left: 5px solid #fc3;">
+                    <h4 style="color: #963; margin-top: 0;">🔧 4. Критическая проблема с апрувом</h4>
+                    <p>Технически воронка настроена корректно, но апрув катастрофически низкий: 1 из 6 лидов (16.7%). Остальные отклонены или ожидают подтверждения.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 7. Что можно было сделать лучше</h2>
+            
+            <h3>❌ Ошибки, которых нужно было избежать:</h3>
+            
+            <div style="background: #fee; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>1. Не тратить бюджет на редактирование отклонённых объявлений</h4>
+                <p><strong>Что было:</strong> 4 попытки редактирования → каждый раз Rejected</p>
+                <p><strong>Что нужно было:</strong> Сразу удалить проблемное объявление и создать новое с нуля</p>
+            </div>
+
+            <div style="background: #fee; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>2. Не увеличивать бюджет на плохо конвертирующую связку</h4>
+                <p><strong>Что было:</strong> После первого лида бюджет увеличили на 20%, CPL остался высоким</p>
+                <p><strong>Что нужно было:</strong> Зафиксировать бюджет на $5-10/день, если CPL выше целевого в 2 раза → стоп</p>
+            </div>
+
+            <div style="background: #fee; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>3. Не трогать рабочую связку при попытке оптимизации</h4>
+                <p><strong>Что было:</strong> Попытались "улучшить" таргетинг → Meta снова в модерацию → объявление отклонено</p>
+                <p><strong>Что нужно было:</strong> Создать новый ad set для теста, оставить рабочий без изменений</p>
+            </div>
+
+            <div style="background: #fee; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>4. Сразу фокусироваться на женщинах 55+</h4>
+                <p><strong>Что было:</strong> Широкий таргет 25-65+, потрачен бюджет на нецелевую аудиторию</p>
+                <p><strong>Что нужно было:</strong> С первого дня: женщины 55+, креативы под эту аудиторию</p>
+            </div>
+
+            <div style="background: #fee; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>5. Жёстко контролировать бюджет теста</h4>
+                <p><strong>Что было:</strong> Планировали $50-70, реально потратили $86, перерасход</p>
+                <p><strong>Что нужно было:</strong> Лимит 50-70 USD, если после 50 USD нет лидов по целевому CPL → стоп</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 8. Рекомендации на следующий этап</h2>
+            
+            <h3>✅ Что делать дальше:</h3>
+
+            <div style="background: #efe; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>1. Переписать креативы под политику Meta</h4>
+                <ul>
+                    <li>❌ "−12 кг за 30 дней" → ✅ "Поддержка естественного похудения"</li>
+                    <li>❌ "Без диеты и тренировок" → ✅ "Помогает контролировать аппетит при правильном питании"</li>
+                    <li>❌ Агрессивные "до/после" → ✅ Банка продукта + фрукты/ягоды</li>
+                </ul>
+            </div>
+
+            <div style="background: #efe; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>2. Отдельный ad set под женщин 55+</h4>
+                <ul>
+                    <li>Пол: только женщины</li>
+                    <li>Возраст: 55-64 и 65+</li>
+                    <li>Язык: польский</li>
+                    <li>Креативы: акцент на здоровье, а не внешность</li>
+                </ul>
+            </div>
+
+            <div style="background: #efe; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>3. Финансовая дисциплина</h4>
+                <ul>
+                    <li>Лимит бюджета теста: <strong>50-70 USD</strong></li>
+                    <li>Целевой CPL: <strong>не выше 5-7 USD</strong></li>
+                    <li>Если CPL > 10 USD после 50 кликов → отключить</li>
+                    <li>Считать реальные расходы (не только по кабинету)</li>
+                </ul>
+            </div>
+
+            <div style="background: #efe; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                <h4>4. Сценарий развития</h4>
+                <p><strong>Вариант A:</strong> Если CPL удалось снизить до 5-7 USD → масштабировать через дублирование ad set'ов</p>
+                <p><strong>Вариант B:</strong> Если CPL остаётся выше 10-15 USD → прекратить лить, протестировать другой оффер или источник (TikTok Ads, Native)</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Итоговая таблица: Было vs Должно быть</h2>
+            
+            <table>
+                <tr>
+                    <th>Аспект</th>
+                    <th>❌ Что было (ошибки)</th>
+                    <th>✅ Что нужно было</th>
+                </tr>
+                <tr>
+                    <td><strong>Таргетинг</strong></td>
+                    <td>Широкий: женщины и мужчины 25-65+</td>
+                    <td>Узкий: женщины 55+, Польша, польский</td>
+                </tr>
+                <tr>
+                    <td><strong>Креативы</strong></td>
+                    <td>"−12 кг за 30 дней", агрессивные "до/после"</td>
+                    <td>Мягкие формулировки, фокус на здоровье</td>
+                </tr>
+                <tr>
+                    <td><strong>Модерация</strong></td>
+                    <td>4 попытки редактирования отклонённых</td>
+                    <td>Сразу удалять и создавать новые</td>
+                </tr>
+                <tr>
+                    <td><strong>Бюджет</strong></td>
+                    <td>$86 без чёткого стоп-лосса</td>
+                    <td>Лимит $50-70, жёсткий контроль CPL</td>
+                </tr>
+                <tr>
+                    <td><strong>CPL</strong></td>
+                    <td>$86 (за апрув) vs $3.9 (медиана)</td>
+                    <td>Целевой CPL: $5-7 max</td>
+                </tr>
+                <tr>
+                    <td><strong>Масштабирование</strong></td>
+                    <td>Редактирование рабочих объявлений</td>
+                    <td>Дублирование ad set'ов без изменений</td>
+                </tr>
+                <tr>
+                    <td><strong>Лендинги</strong></td>
+                    <td>3 лендинга параллельно (недостаточно трафика)</td>
+                    <td>Последовательное тестирование по 300-500 кликов</td>
+                </tr>
+                <tr>
+                    <td><strong>ROI</strong></td>
+                    <td>-60% (убыток $52)</td>
+                    <td>Целевой ROI: +30% до +70%</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🎓 Чему научил этот тест</h2>
+            
+            <h3>✅ Позитивные моменты</h3>
+            <ul class="checklist">
+                <li>Научились работать с Keitaro: правильно настроили потоки и ротацию лендингов</li>
+                <li>Поняли политики Meta для похудалок: что можно, что нельзя, какие формулировки безопасны</li>
+                <li>Определили целевую аудиторию: женщины 55+ – основной сегмент</li>
+                <li>Получили первый опыт: запустили кампанию от А до Я, собрали статистику</li>
+            </ul>
+
+            <h3>📚 Уроки для будущих тестов</h3>
+            <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; margin: 20px 0;">
+                <ol style="line-height: 2;">
+                    <li><strong>Модерация жёстче, чем кажется</strong> – не пытаться обмануть, создавать креативы сразу под политики</li>
+                    <li><strong>Бюджет нужно контролировать жёстко</strong> – если CPL в 2 раза выше целевого → стоп</li>
+                    <li><strong>Тестировать последовательно</strong> – сначала один лендинг, потом другой (минимум 300-500 кликов)</li>
+                    <li><strong>Масштабировать через дублирование</strong> – не редактировать рабочие объявления</li>
+                    <li><strong>Знать свои цифры</strong> – целевой CPL, выплата за лид, целевой ROI, стоп-лосс</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2>📞 Следующие шаги</h2>
+            
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 10px; margin: 20px 0;">
+                <h3 style="color: white; margin-top: 0;">Что делаем дальше:</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.5; font-size: 1.1em;">
+                    <li>✅ Создаём новые креативы под политики Meta (мягкие формулировки)</li>
+                    <li>✅ Настраиваем ad set под женщин 55+</li>
+                    <li>✅ Тестируем новый лендинг ("медицинский" вариант)</li>
+                    <li>✅ Ставим жёсткий лимит: $50-70 на тест</li>
+                    <li>✅ Если CPL &gt; 10 USD после 50 кликов → стоп</li>
+                </ul>
+            </div>
+
+            <p style="color: #666; margin-top: 30px;">
+                <strong>Альтернативный план:</strong><br>
+                Если не получится с Nano Slim → тестируем другой оффер<br>
+                Если Meta не пропускает → пробуем TikTok Ads или Native
+            </p>
+
+            <button onclick="window.print()" class="btn-download">
+                📄 Распечатать кейс или сохранить как PDF
+            </button>
+
+            <p style="margin-top: 40px; color: #999; font-size: 0.9em;">
+                <strong>Дата:</strong> Февраль 2026<br>
+                <em>Этот кейс создан для анализа и обучения. Все данные реальные, выводы сделаны на основе фактических результатов.</em>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
